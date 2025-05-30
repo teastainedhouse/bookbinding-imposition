@@ -1,22 +1,36 @@
 import tkinter
-from PyPDF2 import PdfReader
+import math
+from pypdf import PdfReader
 
 source = "book.pdf"
+pages_in_sig_letter = 4
+signature_size = 4
 
 
 def main():
     #open_file()
-    reader = PdfReader(source)
-    number_of_pages = len(reader.pages)
-    print(number_of_pages)
-    #page = reader.pages[0]
-    #text = page.extract_text()
-    
+    signature_count = get_signature_count(15)
+    print(signature_count)
+
 
 
 def open_file():
     with open(source, "r") as file:
-        print("something")
+        return file
+
+
+def get_page_count():
+    reader = PdfReader(source)
+    number_of_pages = len(reader.pages)
+    #page_count = get_page_count()
+    #page = reader.pages[0]
+    print(number_of_pages)
+
+
+def get_signature_count(page_count):
+    signature_count = page_count / (signature_size * pages_in_sig_letter) #replace later to accept input
+    signature_count = math.ceil(signature_count)
+    return signature_count
 
 
 """
