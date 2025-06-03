@@ -1,5 +1,4 @@
-# bookbinding-imposition
-*FOSS for hobbyist bookbinders to impose PDFs for printing signatures*
+*Started May 28th, 2025*
 
 Goal: open source imposition software for hobby bookbinders
 
