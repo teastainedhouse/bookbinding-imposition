@@ -1,5 +1,7 @@
-from pypdf import PdfReader, PdfWriter, PageObject, Transformation
+from pypdf import PdfReader, PdfWriter, PageObject
+
 SIGNATURE_SIZE = 16
+
 
 def main():
     printable_pdf = fill_signature("book2.pdf", SIGNATURE_SIZE)
@@ -41,20 +43,20 @@ def create_letter_size_printable_pdf(pypdf_object, output_path, signature_size):
 
     finished_pdf = PdfWriter()
 
-    #loop over the number of signatures
+    # loop over the number of signatures
     for signature in range(number_of_signatures):
         first_page = signature * signature_size
         last_page = first_page + (signature_size - 1)
-        #loop over the signature size to add two pages to each new page
+        # loop over the signature size to add two pages to each new page
         for i in range(half):
             lower_number = first_page + i
             higher_number = last_page - i
+            # if 'i' is odd add two pages with odd to the right:
             if i % 2 != 0:
-            #if i is odd add two pages with odd to the right:
                 left_page = pypdf_object.pages[higher_number]
                 right_page = pypdf_object.pages[lower_number]
+            # if 'i' is even add two pages with odd to the left:
             else:
-            # if i is even add two pages with odd to the left:
                 left_page = pypdf_object.pages[lower_number]
                 right_page = pypdf_object.pages[higher_number]
 
