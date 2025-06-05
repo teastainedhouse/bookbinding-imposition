@@ -1,3 +1,14 @@
+*June 6th, 2025*
+Posted to Reddit and got useful feedback! I will try to add:
+- quarto, octavo, sextodecimo layouts 
+  - fold lines for the above
+- crop/trim marks
+- simplified GUI
+- support for EPUB files from Gutenburg.org (my own idea)
+
+
+---
+
 *Started May 28th, 2025*
 
 Goal: open source imposition software for hobby bookbinders

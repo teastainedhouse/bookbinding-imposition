@@ -54,11 +54,11 @@ def create_pdf(input_path: str, output_path: str, signature_size: int):
         for i in range(half):
             lower_number = first_page + i
             higher_number = last_page - i
-            # if 'i' is odd then add two pages with odd to the right:
+            # if 'i' is odd then add two pages with odd to the left:
             if i % 2 != 0:
                 left_page = pypdf_object.pages[lower_number]
                 right_page = pypdf_object.pages[higher_number]
-            # if 'i' is even then add two pages with odd to the left:
+            # if 'i' is even then add two pages with odd to the right:
             else:
                 left_page = pypdf_object.pages[higher_number]
                 right_page = pypdf_object.pages[lower_number]
