@@ -30,11 +30,28 @@ jobs:
 
     - name: Build executable with PyInstaller
       run: |
-        pyinstaller --onefile --windowed --add-data "hourglass.gif${{ runner.os == 'Windows' && ';.' || ':' }}" main.py
+        if [[ "$RUNNER_OS" == "Windows" ]]; then
+          pyinstaller --onefile --windowed --add-data "hourglass.gif;." main.py
+        elif [[ "$RUNNER_OS" == "macOS" || "$RUNNER_OS" == "Linux" ]]; then
+          pyinstaller --onefile --windowed --add-data "hourglass.gif:." main.py
+        fi
+      shell: bash
+
+    - name: Rename output binary
+      run: |
+        if [[ "$RUNNER_OS" == "Windows" ]]; then
+          mv dist/main.exe dist/bookbinding-imposition-windows.exe
+        elif [[ "$RUNNER_OS" == "macOS" ]]; then
+          mv dist/main dist/bookbinding-imposition-macos
+        elif [[ "$RUNNER_OS" == "Linux" ]]; then
+          mv dist/main dist/bookbinding-imposition-linux
+        fi
+      shell: bash
+
+
 
     - name: Upload executable
       uses: actions/upload-artifact@v4
       with:
-        name: app-${{ matrix.os }}
-        path: |
-          dist/*
+        name: app-${{ runner.os }}
+        path: dist/bookbinding-imposition-*
