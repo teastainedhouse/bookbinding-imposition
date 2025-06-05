@@ -29,19 +29,21 @@ class ImpositionGUI:
         output_lbl = ttk.Label(self.root, text="Output location: ")
         output_entry = ttk.Entry(self.root, textvariable=self.output_path, width=50)
         output_btn = ttk.Button(self.root, text="Select", command=self.pick_output)
-        sig_lbl = ttk.Label(self.root, text="Signature size:")
-        for idx, size in enumerate([8, 12, 16, 32], start=3):
+        sig_lbl = ttk.LabelFrame(self.root, text="Signature size:", padding=(10,5))
+        for idx, size in enumerate([8, 12, 16, 32]):
             tk.Radiobutton(
-                self.root, text=f"{size} pages",
-                variable=self.signature_size, value=size
-            ).grid(row=idx, column=0, padx=(5, 15))
+                sig_lbl,
+                text=f"{size} pages",
+                variable=self.signature_size,
+                value=size
+            ).grid(row=0, column=idx, padx=10, pady=5)
         run_btn = ttk.Button(self.root, text="Run", width=25, command=self.run)
 
         # grid widgets
         input_lbl.grid(row=0, column=0, sticky="e", padx=5, pady=5)
         input_entry.grid(row=0, column=1, padx=5, pady=5)
         input_btn.grid(row=0, column=2, padx=5, pady=5)
-        sig_lbl.grid(row=1, column=0, padx=(5, 5), pady=(10, 10))
+        sig_lbl.grid(row=1, column=0, columnspan=3, padx=(5, 5), pady=(10, 10))
         output_lbl.grid(row=7, column=0, padx=5, pady=(20, 20))
         output_entry.grid(row=7, column=1)
         output_btn.grid(row=7, column=2, padx=(5, 15))
