@@ -55,7 +55,7 @@ jobs:
         VERSION=${{ github.ref_name }}
         cd dist
         if [[ "$RUNNER_OS" == "Windows" ]]; then
-          zip bookbinding-imposition-windows-$VERSION.zip bookbinding-imposition-windows.exe ../README.md
+          powershell Compress-Archive -Path bookbinding-imposition-windows.exe, ../README.md -DestinationPath bookbinding-imposition-windows-$VERSION.zip
         elif [[ "$RUNNER_OS" == "macOS" ]]; then
           zip bookbinding-imposition-macos-$VERSION.zip bookbinding-imposition-macos ../README.md
         elif [[ "$RUNNER_OS" == "Linux" ]]; then
