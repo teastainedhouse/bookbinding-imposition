@@ -1,5 +1,5 @@
 # Bookbinding Imposition
-*FOSS for hobbyist bookbinders to impose PDFs for printing signatures*
+*FOSS python program for hobbyist bookbinders to impose PDFs for printing signatures.*
 
 ## Notes for folio printing
 
@@ -18,9 +18,9 @@ For best results make sure:
 | Tabloid Extra (12" x 18") | 9" x 12"             |
 | Super B (13" x 19")      | 9.5" x 13"           |
 
-### Recommended Workflow
+### Recommended workflow
 
-1. Create (or download) the original PDF with the correct page sizes.
+1. Create (or download) the original PDF with the desired page size.
    1. or use the size as-is, i.e. if the start PDF is alerady designed in letter size and you then run it through 
       the imposer you'll have larger margins but it'll still work fine.
 2. Run PDF through this imposer

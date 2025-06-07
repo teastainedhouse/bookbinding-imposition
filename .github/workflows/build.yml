@@ -5,6 +5,8 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -32,7 +34,7 @@ jobs:
       run: |
         if [[ "$RUNNER_OS" == "Windows" ]]; then
           pyinstaller --onefile --windowed --add-data "hourglass.gif;." main.py
-        elif [[ "$RUNNER_OS" == "macOS" || "$RUNNER_OS" == "Linux" ]]; then
+        else
           pyinstaller --onefile --windowed --add-data "hourglass.gif:." main.py
         fi
       shell: bash
@@ -48,10 +50,30 @@ jobs:
         fi
       shell: bash
 
+    - name: Zip binary with README
+      run: |
+        VERSION=${{ github.ref_name }}
+        cd dist
+        if [[ "$RUNNER_OS" == "Windows" ]]; then
+          zip bookbinding-imposition-windows-$VERSION.zip bookbinding-imposition-windows.exe ../README.md
+        elif [[ "$RUNNER_OS" == "macOS" ]]; then
+          zip bookbinding-imposition-macos-$VERSION.zip bookbinding-imposition-macos ../README.md
+        elif [[ "$RUNNER_OS" == "Linux" ]]; then
+          zip bookbinding-imposition-linux-$VERSION.zip bookbinding-imposition-linux ../README.md
+        fi
+      shell: bash
 
+    - name: Upload to GitHub Release (if triggered by a release)
+      if: github.event_name == 'release'
+      uses: softprops/action-gh-release@v2
+      with:
+        files: dist/bookbinding-imposition-*-*.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Upload executable
+    - name: Upload artifact (for Actions tab)
+      if: github.event_name != 'release'
       uses: actions/upload-artifact@v4
       with:
         name: app-${{ runner.os }}
-        path: dist/bookbinding-imposition-*
+        path: dist/bookbinding-imposition-*-*.zip

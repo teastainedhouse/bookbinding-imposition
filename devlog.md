@@ -3,7 +3,7 @@ Posted to Reddit and got useful feedback! I will try to add:
 - quarto, octavo, sextodecimo layouts 
   - fold lines for the above
 - crop/trim marks
-- simplified GUI
+- keep GUI simplified
 - support for EPUB files from Gutenburg.org (my own idea)
 
 
